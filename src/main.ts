@@ -5,6 +5,10 @@ import "./style.css";
 const dino = document.getElementById("dino");
 const cactus = document.getElementById("cactus");
 const bird = document.getElementById("bird");
+let birdsArr: (HTMLElement | null)[] = [];
+let cactusArr: any[] = [];
+cactusArr.push(cactus);
+birdsArr.push(bird);
 
 const scoreText = document.getElementById("scoreText");
 let score = 0;
@@ -23,8 +27,9 @@ function main() {
   if (gameOver == false) {
     score = score + 1;
     setText("Score: " + score);
-
-    checkGameOver();
+    birdsArr.forEach((bird, index) => {
+      checkGameOver(bird, cactusArr[index]);
+    });
   }
 }
 
@@ -51,8 +56,8 @@ function removeObstacles() {
   bird?.classList.remove("birdMove");
 }
 
-function checkGameOver() {
-  if (gameOver == false && dino != null && cactus != null && bird != null) {
+function checkGameOver(cact, birdy) {
+  if (gameOver == false && dino != null && cact != null && birdy != null) {
     //get is dinosaur jumping
     let dinoTop = parseInt(
       window.getComputedStyle(dino).getPropertyValue("top")
@@ -60,12 +65,12 @@ function checkGameOver() {
 
     //get cactus position
     let cactusleft = parseInt(
-      window.getComputedStyle(cactus).getPropertyValue("left")
+      window.getComputedStyle(cact).getPropertyValue("left")
     );
 
     //get bird position
     let birdleft = parseInt(
-      window.getComputedStyle(bird).getPropertyValue("left")
+      window.getComputedStyle(birdy).getPropertyValue("left")
     );
 
     //detect cactus collision
