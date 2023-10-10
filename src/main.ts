@@ -23,6 +23,14 @@ setInterval(function () {
   main();
 }, 10);
 
+setInterval(function () {
+  const newCactus = document.createElement("div");
+  const gameDiv = document.getElementById("game");
+  newCactus.classList.add("cactusMove");
+  gameDiv?.appendChild(newCactus);
+  console.log("new cactus made POG");
+}, 1000);
+
 function main() {
   if (gameOver == false) {
     score = score + 1;
@@ -34,7 +42,7 @@ function main() {
 }
 
 function jump() {
-  if (gameOver === false) {
+  if (gameOver == false) {
     if (isJumping == false) {
       isJumping = true;
       dino?.classList.add("jump");
@@ -56,7 +64,7 @@ function removeObstacles() {
   bird?.classList.remove("birdMove");
 }
 
-function checkGameOver(cact, birdy) {
+function checkGameOver(birdy, cact) {
   if (gameOver == false && dino != null && cact != null && birdy != null) {
     //get is dinosaur jumping
     let dinoTop = parseInt(
